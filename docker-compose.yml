@@ -1,0 +1,36 @@
+
+services:
+
+  mongo:
+    image: mongo:7
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    restart: always
+
+  redis:
+    image: redis:7
+    container_name: redis
+    ports:
+      - "6379:6379"
+    restart: always
+
+  app:
+    build: .
+    container_name: java-app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongo
+      - redis
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://mongo:27017/customer
+      SPRING_MAIL_USERNAME: aiuse069@gmail.com
+      SPRING_MAIL_PASSWORD: ravcoackymrzalkv
+      SPRING_REDIS_HOST: redis
+      SPRING_REDIS_PORT: 6379
+
+volumes:
+  mongo-data:
