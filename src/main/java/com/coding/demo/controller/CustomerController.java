@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,9 +26,6 @@ public class CustomerController {
 
     @Value("${email.subject}")
     private String subject;
-
-    private static int counter = 0;
-
 
     @PostMapping("/")
     public Customer persistCustomer(@RequestBody Customer customer) {
@@ -66,7 +62,6 @@ public class CustomerController {
         }
 
     }
-
 
 
 }
